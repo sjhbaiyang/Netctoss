@@ -128,6 +128,16 @@ public class AccountController {
         return new AjaxResult(accounts);
     }
 
+
+
+    //通过身份证查询
+    @ResponseBody
+    @RequestMapping(value = "/findByIdCard",method = RequestMethod.POST)
+    public Account findByIdCard(@Param("idcardNo")String idcardNo){
+        System.out.println(idcardNo);
+        return accountService.findByIdCard(idcardNo);
+    }
+
     public HttpServletRequest getRequest() {
         return request;
     }

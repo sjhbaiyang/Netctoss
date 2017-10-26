@@ -147,6 +147,11 @@ public class AccountServiceImpl implements AccountService {
         return pageInfo;
     }
 
+    @Override
+    public Account findByIdCard(String idcardNo) {
+        return accountMapper.findAccByIdCard(idcardNo);
+    }
+
 
     public List<Account> findAllAccount() {
         return accountMapper.findAllAccount();

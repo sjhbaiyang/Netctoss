@@ -51,7 +51,7 @@
     <include refid="Base_Column_List"/>
     FROM account where login_name = #{loginName}
   </select>
-  <select id="findAccByIdCard" resultType="com.lanou.bean.Account">
+  <select id="findAccByIdCard" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM account WHERE idcard_no = #{idcardNo}

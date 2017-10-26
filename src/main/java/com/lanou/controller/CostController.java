@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -121,6 +122,13 @@ public class CostController {
         return costService.editCost(cost);
     }
 
+
+    //查询资费类型
+    @ResponseBody
+    @RequestMapping(value = "/findAllCost", method = RequestMethod.POST)
+    public List<Cost> findNameDistinct() {
+        return costService.findAllCost();
+    }
 
 
     public HttpServletRequest getRequest() {

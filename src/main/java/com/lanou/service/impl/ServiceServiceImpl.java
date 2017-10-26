@@ -2,7 +2,6 @@ package com.lanou.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lanou.bean.Account;
 import com.lanou.mapper.ServiceMapper;
 import com.lanou.service.ServiceService;
 import com.lanou.bean.Service;
@@ -12,7 +11,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 
 /**
  * Created by dllo on 17/10/25.
@@ -54,9 +52,9 @@ public class ServiceServiceImpl implements ServiceService {
     public Service updateSerStatusById(Service service) {
 
         // 0, 更改为暂停状态,记载暂停时间
-        if (service.getStatus().equals("0")) {
+        if (service.getStatus().equals("0")){
             service.setPauseDate(new Date());
-        } else if (service.getStatus().equals("1")) {
+        }else if (service.getStatus().equals("1")){
             // 1, 更改为开通状态,清空暂停时间
             try {
                 service.setPauseDate(new SimpleDateFormat("yyyy-MM-dd").parse("0000-00-00"));
@@ -81,5 +79,43 @@ public class ServiceServiceImpl implements ServiceService {
         }
 
         return true;
+    }
+
+    //添加ser
+    public Service addService(Service service) {
+        String unixHost = service.getUnixHost();
+        Service serByHost = serviceMapper.findSerByHost(unixHost);
+        // != null  unix_host已经注册过账号
+        if (serByHost != null){
+            return serByHost;
+        }
+
+        service.setCreateDate(new Date());
+        service.setStatus("1");
+        serviceMapper.insertSelective(service);
+        return service;
+    }
+
+    public PageInfo<Service> fuzzySearchForSer(String idcardNo, Service service, Integer pageNo, Integer pageSize) {
+
+        //判断参数的合法性
+        pageNo = pageNo == null ? 1 : pageNo;
+        pageSize = pageSize == null ? 3 : pageSize;
+
+        PageHelper.startPage(pageNo, pageSize);
+
+        System.out.println("22:--" );
+        //获取全部的account
+        List<Service> allService = serviceMapper.fuzzySearchForSer(
+                service.getStatus(),
+                service.getUnixHost(),
+                service.getOsUsername(),
+                idcardNo);
+
+        System.out.println("33:--" );
+        //使用pageInfo对结果进行包装
+        PageInfo<Service> pageInfo = new PageInfo<Service>(allService);
+
+        return pageInfo;
     }
 }

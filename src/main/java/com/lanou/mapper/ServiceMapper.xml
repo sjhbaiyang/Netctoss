@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lanou.mapper.ServiceMapper">
   <resultMap id="BaseResultMap" type="com.lanou.bean.Service">
-    <id column="service_id" jdbcType="INTEGER" property="serviceId" />
-    <result column="account_id" jdbcType="INTEGER" property="accountId" />
-    <result column="unix_host" jdbcType="VARCHAR" property="unixHost" />
-    <result column="os_username" jdbcType="VARCHAR" property="osUsername" />
-    <result column="login_passwd" jdbcType="VARCHAR" property="loginPasswd" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="pause_date" jdbcType="TIMESTAMP" property="pauseDate" />
-    <result column="close_date" jdbcType="TIMESTAMP" property="closeDate" />
-    <result column="cost_id" jdbcType="INTEGER" property="costId" />
+    <id column="service_id" jdbcType="INTEGER" property="serviceId"/>
+    <result column="account_id" jdbcType="INTEGER" property="accountId"/>
+    <result column="unix_host" jdbcType="VARCHAR" property="unixHost"/>
+    <result column="os_username" jdbcType="VARCHAR" property="osUsername"/>
+    <result column="login_passwd" jdbcType="VARCHAR" property="loginPasswd"/>
+    <result column="status" jdbcType="CHAR" property="status"/>
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+    <result column="pause_date" jdbcType="TIMESTAMP" property="pauseDate"/>
+    <result column="close_date" jdbcType="TIMESTAMP" property="closeDate"/>
+    <result column="cost_id" jdbcType="INTEGER" property="costId"/>
 
     <association property="account" column="account_id"
                  javaType="com.lanou.bean.Account" select="com.lanou.mapper.AccountMapper.selectByPrimaryKey"/>
@@ -25,7 +25,7 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from service
     where service_id = #{serviceId,jdbcType=INTEGER}
   </select>
@@ -34,19 +34,38 @@
     <include refid="Base_Column_List"/>
     FROM service
   </select>
+  <select id="findSerByHost" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM service WHERE unix_host = #{unixHost}
+  </select>
+  <select id="fuzzySearchForSer" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM service WHERE status like CONCAT('%',#{status},'%')
+
+    and unix_host like CONCAT('%',#{unixHost},'%')
+
+    and os_username like CONCAT('%',#{osUsername},'%')
+
+    and account_id in(
+    select
+    account_id from account where idcard_no like CONCAT('%',#{idcardNo},'%')
+    )
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from service
     where service_id = #{serviceId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanou.bean.Service">
-    insert into service (service_id, account_id, unix_host, 
-      os_username, login_passwd, status, 
-      create_date, pause_date, close_date, 
-      cost_id)
-    values (#{serviceId,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{unixHost,jdbcType=VARCHAR}, 
-      #{osUsername,jdbcType=VARCHAR}, #{loginPasswd,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{pauseDate,jdbcType=TIMESTAMP}, #{closeDate,jdbcType=TIMESTAMP}, 
-      #{costId,jdbcType=INTEGER})
+    insert into service (service_id, account_id, unix_host,
+    os_username, login_passwd, status,
+    create_date, pause_date, close_date,
+    cost_id)
+    values (#{serviceId,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{unixHost,jdbcType=VARCHAR},
+    #{osUsername,jdbcType=VARCHAR}, #{loginPasswd,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+    #{createDate,jdbcType=TIMESTAMP}, #{pauseDate,jdbcType=TIMESTAMP}, #{closeDate,jdbcType=TIMESTAMP},
+    #{costId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.lanou.bean.Service">
     insert into service

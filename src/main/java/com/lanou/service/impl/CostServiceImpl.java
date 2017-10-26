@@ -98,6 +98,11 @@ public class CostServiceImpl implements CostService {
         return queryCostSortByPage(pageNo, pageSize, choose);
     }
 
+    @Override
+    public List<Cost> findAllCost() {
+        return costMapper.findAllCost();
+    }
+
     //按顺序查询--分页
     public PageInfo<Cost> queryCostSortByPage(
             Integer pageNo, Integer pageSize, Integer choose) {
@@ -109,8 +114,7 @@ public class CostServiceImpl implements CostService {
 
         //获取全部的blog
         List<Cost> costList = null;
-        //choose = 0/不排序
-        //choose = 1/costAsc , 2/costDesc , 3/DurationAsc , 4/DurationDesc
+
         if (choose == 0){
             costList = costMapper.findAllCost();
         }else if (choose == 1) {

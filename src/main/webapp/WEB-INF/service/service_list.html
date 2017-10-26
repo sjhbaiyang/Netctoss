@@ -37,7 +37,7 @@
                         }
                         $("#showInfo").html("删除成功");
                         document.getElementById("operate_result_info").style.display = "block";
-                        window.setTimeout("operate_result_info.style.display='none'",1000);
+                        window.setTimeout("operate_result_info.style.display='none'", 1000);
                         var html = $(".current_page").html();
                         basepage(html);
                     }
@@ -82,7 +82,7 @@
                         document.getElementById("operate_result_info").style.display = "block";
                     }
 
-                    window.setTimeout("operate_result_info.style.display='none'",1000);
+                    window.setTimeout("operate_result_info.style.display='none'", 1000);
                     //返回当前页
                     var html = $(".current_page").html();
                     basepage(html);
@@ -99,7 +99,7 @@
                     .append($("<td></td>").html(Elp.account.realName))
                     .append($("<td></td>").html(Elp.osUsername))
                     .append($("<td></td>").html(statu))
-                    .append($("<td></td>").html(Elp.account.lastLoginIp))
+                    .append($("<td></td>").html(Elp.unixHost))
                     .append($("<td></td>").append($("<a class='summary' onmouseover='showDetail(true,this);' onmouseout='showDetail(false,this);'>").html(Elp.cost.name))
                             .append($("<div class='detail_info'></div>").html(Elp.cost.descr)))
                     .append($("<td></td>")
@@ -118,7 +118,7 @@
                     .append($("<td></td>").html(Elp.account.realName))
                     .append($("<td></td>").html(Elp.osUsername))
                     .append($("<td></td>").html(statu))
-                    .append($("<td></td>").html(Elp.account.lastLoginIp))
+                    .append($("<td></td>").html(Elp.unixHost))
                     .append($("<td></td>").append($("<a class='summary' onmouseover='showDetail(true,this);' onmouseout='showDetail(false,this);'>").html(Elp.cost.name))
                             .append($("<div class='detail_info'></div>").html(Elp.cost.descr)))
                     .append($("<td></td>")
@@ -136,7 +136,7 @@
                     .append($("<td></td>").html(Elp.account.realName))
                     .append($("<td></td>").html(Elp.osUsername))
                     .append($("<td></td>").html(statu))
-                    .append($("<td></td>").html(Elp.account.lastLoginIp))
+                    .append($("<td></td>").html(Elp.unixHost))
                     .append($("<td></td>").append($("<a class='summary' onmouseover='showDetail(true,this);' onmouseout='showDetail(false,this);'>").html(Elp.cost.name))
                             .append($("<div class='detail_info'></div>").html(Elp.cost.descr)))
                     .append($("<td></td>")))
@@ -158,8 +158,9 @@
         //模糊查询
         function fuzzySearch(val) {
             var byCard = $("#findByCard").val();
-            var byName = $("#findByName").val();
-            var byLoginName = $("#findByLoginName").val();
+            var byunixHost = $("#findByunixHost").val();
+            var byLoginName = $("#findByosUsername").val();
+
             var byStatu = $("#findByStatu option:selected").val();
             var statu = null;
             if (byStatu == "暂停") {
@@ -173,12 +174,12 @@
             }
 
             $.ajax({
-                url: "/fuzzySearch",
+                url: "/fuzzySearchForSer",
                 type: "post",
                 data: {
                     idcardNo: byCard,
-                    realName: byName,
-                    loginName: byLoginName,
+                    unixHost: byunixHost,
+                    osUsername: byLoginName,
                     status: statu,
                     pageNo: val,
                     pageSize: null
@@ -319,6 +320,8 @@
 
         //显示全部
         function service_list() {
+//            var search = location.search;
+//            alert(search);
 
             $.ajax({
                 url: "/findAllService",
@@ -347,7 +350,7 @@
                             addlistDel(Elp, statu);
                         }
 
-//
+
                     });
 
                     //分页信息
@@ -412,18 +415,18 @@
     <form action="" method="">
         <!--查询-->
         <div class="search_add">
-            <div>OS 账号：<input type="text" value="" class="width100 text_search"/></div>
-            <div>服务器 IP：<input type="text" value="" class="width100 text_search"/></div>
-            <div>身份证：<input type="text" value="" class="text_search"/></div>
+            <div>OS 账号：<input type="text" id="findByosUsername" value="" class="width100 text_search"/></div>
+            <div>服务器 IP：<input type="text" id="findByunixHost" value="" class="width100 text_search"/></div>
+            <div>身份证：<input type="text" id="findByCard" value="" class="text_search"/></div>
             <div>状态：
-                <select class="select_search">
+                <select id="findByStatu" class="select_search">
                     <option>全部</option>
                     <option>开通</option>
                     <option>暂停</option>
                     <option>删除</option>
                 </select>
             </div>
-            <div><input type="button" value="搜索" class="btn_search"/></div>
+            <div><input type="button" onclick="fuzzySearch()" value="搜索" class="btn_search"/></div>
             <input type="button" value="增加" class="btn_add" onclick="location.href='/service_add.html';"/>
         </div>
         <!--删除的操作提示-->

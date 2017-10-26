@@ -26,4 +26,6 @@ public interface AccountService {
     boolean delAccById(Account account);
 
     PageInfo<Account> fuzzySearch(Account account,Integer pageNo,Integer pageSize);
+
+    Account findByIdCard(String idcardNo);
 }

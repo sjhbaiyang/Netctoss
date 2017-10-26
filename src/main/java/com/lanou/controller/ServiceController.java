@@ -1,7 +1,6 @@
 package com.lanou.controller;
 
 import com.github.pagehelper.PageInfo;
-
 import com.lanou.bean.Service;
 import com.lanou.service.ServiceService;
 import com.lanou.utils.AjaxResult;
@@ -21,7 +20,7 @@ public class ServiceController {
     @Resource
     private ServiceService serviceService;
 
-    //跳转到主页面
+    //跳转到业务页面
     @RequestMapping(value = "service/service_list")
     public String service_list() {
         return "service/service_list";
@@ -39,14 +38,6 @@ public class ServiceController {
         return "service/service_add";
     }
 
-
-    //到显示当前用户信息页面
-    @RequestMapping(value = "/service_detail")
-    public String service_detail() {
-        return "service/service_detail";
-    }
-
-
     //查询全部
     @ResponseBody
     @RequestMapping(value = "/findAllService", method = RequestMethod.POST)
@@ -57,6 +48,11 @@ public class ServiceController {
         return new AjaxResult(allService);
     }
 
+    //到显示当前用户信息页面
+    @RequestMapping(value = "/service_detail")
+    public String service_detail() {
+        return "service/service_detail";
+    }
 
     //根据id查询
     @ResponseBody
@@ -73,12 +69,31 @@ public class ServiceController {
         return new AjaxResult(service1);
     }
 
-    //删除
+    //删除Acc
     @ResponseBody
     @RequestMapping(value = "/delSer", method = RequestMethod.POST)
     public boolean delAcc(@Param("service") Service service) {
         return serviceService.delSerById(service);
     }
 
+    //添加ser
+    @ResponseBody
+    @RequestMapping(value = "/submSerInfo",method = RequestMethod.POST)
+    public Service submCostInfo(@Param("service")Service service){
+        return serviceService.addService(service);
+    }
 
+    //模糊查询
+    @ResponseBody
+    @RequestMapping(value = "/fuzzySearchForSer",method = RequestMethod.POST)
+    public AjaxResult fuzzySearchForSer(@Param("idcardNo")String idcardNo,
+                                        @Param("service")Service service,
+                                        @Param("pageNo")Integer pageNo,
+                                        @Param("pageSize")Integer pageSize){
+        System.out.println("111:--" );
+        System.out.println(idcardNo);
+        System.out.println(service);
+        PageInfo<Service> service1 = serviceService.fuzzySearchForSer(idcardNo,service,pageNo,pageSize);
+        return new AjaxResult(service1);
+    }
 }

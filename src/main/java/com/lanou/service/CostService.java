@@ -23,4 +23,6 @@ public interface CostService{
     boolean editCost(Cost cost);
 
     PageInfo<Cost> findCostSort(Integer pageNo,Integer pageSize,Integer choose);
+
+    List<Cost> findAllCost();
 }

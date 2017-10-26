@@ -7,13 +7,16 @@ import com.lanou.bean.Service;
  * Created by dllo on 17/10/25.
  */
 public interface ServiceService {
-
-
-    PageInfo<Service> findAllService(Integer pageNo, Integer pageSize);
+    PageInfo<Service> findAllService(Integer pageNo,Integer pageSize);
 
     Service findSerById(Integer serviceId);
 
     Service updateSerStatusById(Service service);
 
     boolean delSerById(Service service);
+
+    Service addService(Service service);
+
+    PageInfo<Service> fuzzySearchForSer(String idcardNo, Service service, Integer pageNo, Integer pageSize);
+
 }

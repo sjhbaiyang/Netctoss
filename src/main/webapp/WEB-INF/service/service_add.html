@@ -54,6 +54,7 @@
                     idcardNo: $("#idCard").val()
                 },
                 success: function (result) {
+
                     //null - 身份证无效
                     if (result == null || result == "") {
                         document.getElementById("errorForIdCard").style.display = "block";
