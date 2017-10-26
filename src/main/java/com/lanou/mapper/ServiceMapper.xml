@@ -12,16 +12,27 @@
     <result column="pause_date" jdbcType="TIMESTAMP" property="pauseDate" />
     <result column="close_date" jdbcType="TIMESTAMP" property="closeDate" />
     <result column="cost_id" jdbcType="INTEGER" property="costId" />
+
+    <association property="account" column="account_id"
+                 javaType="com.lanou.bean.Account" select="com.lanou.mapper.AccountMapper.selectByPrimaryKey"/>
+
+    <association property="cost" column="cost_id"
+                 javaType="com.lanou.bean.Cost" select="com.lanou.mapper.CostMapper.selectByPrimaryKey"/>
   </resultMap>
   <sql id="Base_Column_List">
-    service_id, account_id, unix_host, os_username, login_passwd, status, create_date, 
+    service_id, account_id, unix_host, os_username, login_passwd, status, create_date,
     pause_date, close_date, cost_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from service
     where service_id = #{serviceId,jdbcType=INTEGER}
+  </select>
+  <select id="findAllService" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM service
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from service

@@ -2,6 +2,8 @@ package com.lanou.mapper;
 
 import com.lanou.bean.Service;
 
+import java.util.List;
+
 public interface ServiceMapper {
     int deleteByPrimaryKey(Integer serviceId);
 
@@ -14,4 +16,6 @@ public interface ServiceMapper {
     int updateByPrimaryKeySelective(Service record);
 
     int updateByPrimaryKey(Service record);
+
+    List<Service> findAllService();
 }

@@ -23,6 +23,27 @@ public class Service {
 
     private Integer costId;
 
+    // 级联关系
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Cost getCost() {
+        return cost;
+    }
+
+    public void setCost(Cost cost) {
+        this.cost = cost;
+    }
+
+    private Account account;
+    private Cost cost;
+
     public Integer getServiceId() {
         return serviceId;
     }
