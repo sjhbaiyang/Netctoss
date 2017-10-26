@@ -54,9 +54,9 @@ public class ServiceServiceImpl implements ServiceService {
     public Service updateSerStatusById(Service service) {
 
         // 0, 更改为暂停状态,记载暂停时间
-        if (service.getStatus().equals("0")){
+        if (service.getStatus().equals("0")) {
             service.setPauseDate(new Date());
-        }else if (service.getStatus().equals("1")){
+        } else if (service.getStatus().equals("1")) {
             // 1, 更改为开通状态,清空暂停时间
             try {
                 service.setPauseDate(new SimpleDateFormat("yyyy-MM-dd").parse("0000-00-00"));
