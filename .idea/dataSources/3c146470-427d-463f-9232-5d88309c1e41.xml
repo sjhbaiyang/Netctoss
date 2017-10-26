@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - lease@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="lease">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="AB"/>
+    <schema id="3" name="blo"/>
+    <schema id="4" name="blogs"/>
+    <schema id="5" name="bookstore"/>
+    <schema id="6" name="crm"/>
+    <schema id="7" name="db0602"/>
+    <schema id="8" name="ducp"/>
+    <schema id="9" name="hitest"/>
+    <schema id="10" name="homework"/>
+    <schema id="11" name="hw1"/>
+    <schema id="12" name="hw2"/>
+    <schema id="13" name="information_schema"/>
+    <schema id="14" name="lanou"/>
+    <schema id="15" name="mydb1"/>
+    <schema id="16" name="mysql"/>
+    <schema id="17" name="orders"/>
+    <schema id="18" name="performance_schema"/>
+    <schema id="19" name="perhou"/>
+    <schema id="20" name="PIN"/>
+    <schema id="21" name="PIN1"/>
+    <schema id="22" name="sco"/>
+    <schema id="23" name="share"/>
+    <schema id="24" name="SJH"/>
+    <schema id="25" name="STU"/>
+    <schema id="26" name="sys"/>
+    <schema id="27" name="teams"/>
+    <schema id="28" name="test"/>
+    <schema id="29" name="top"/>
+    <schema id="30" name="userprac"/>
+    <table id="31" parent="1" name="SERVICE_UPDATE_BAK"/>
+    <table id="32" parent="1" name="account"/>
+    <table id="33" parent="1" name="admin_info"/>
+    <table id="34" parent="1" name="admin_role"/>
+    <table id="35" parent="1" name="cost"/>
+    <table id="36" parent="1" name="module_info"/>
+    <table id="37" parent="1" name="role_info"/>
+    <table id="38" parent="1" name="role_module"/>
+    <table id="39" parent="1" name="service"/>
+    <column id="40" parent="31" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(10)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="41" parent="31" name="SERVICE_ID">
+      <mandatory>1</mandatory>
+      <data-type>int(9)|0</data-type>
+    </column>
+    <column id="42" parent="31" name="COST_ID">
+      <mandatory>1</mandatory>
+      <data-type>int(4)|0</data-type>
+    </column>
+    <key id="43" parent="31" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <column id="44" parent="32" name="account_id">
+      <mandatory>1</mandatory>
+      <data-type>int(9)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="45" parent="32" name="recommender_id">
+      <data-type>int(9)|0</data-type>
+    </column>
+    <column id="46" parent="32" name="login_name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="47" parent="32" name="login_passwd">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="48" parent="32" name="status">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="49" parent="32" name="create_date">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="50" parent="32" name="pause_date">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="51" parent="32" name="close_date">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="52" parent="32" name="real_name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="53" parent="32" name="idcard_no">
+      <mandatory>1</mandatory>
+      <data-type>char(18)|0</data-type>
+    </column>
+    <column id="54" parent="32" name="birthdate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="55" parent="32" name="gender">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="56" parent="32" name="occupation">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="57" parent="32" name="telephone">
+      <mandatory>1</mandatory>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="58" parent="32" name="email">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="59" parent="32" name="mailaddress">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="60" parent="32" name="zipcode">
+      <data-type>char(6)|0</data-type>
+    </column>
+    <column id="61" parent="32" name="qq">
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="62" parent="32" name="last_login_time">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="63" parent="32" name="last_login_ip">
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <key id="64" parent="32" name="PRIMARY">
+      <columns>account_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="65" parent="33" name="admin_id">
+      <mandatory>1</mandatory>
+      <data-type>int(8)|0</data-type>
+    </column>
+    <column id="66" parent="33" name="admin_code">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="67" parent="33" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="68" parent="33" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="69" parent="33" name="telephone">
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="70" parent="33" name="email">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="71" parent="33" name="enrolldate">
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="72" parent="33" name="PRIMARY">
+      <columns>admin_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="73" parent="34" name="admin_id">
+      <mandatory>1</mandatory>
+      <data-type>int(8)|0</data-type>
+    </column>
+    <column id="74" parent="34" name="role_id">
+      <mandatory>1</mandatory>
+      <data-type>int(4)|0</data-type>
+    </column>
+    <column id="75" parent="35" name="cost_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="76" parent="35" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="77" parent="35" name="base_duration">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="78" parent="35" name="base_cost">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="79" parent="35" name="unit_cost">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="80" parent="35" name="status">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="81" parent="35" name="descr">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="82" parent="35" name="creatime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="83" parent="35" name="startime">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="84" parent="35" name="cost_type">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <key id="85" parent="35" name="PRIMARY">
+      <columns>cost_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="86" parent="36" name="module_id">
+      <mandatory>1</mandatory>
+      <data-type>int(4)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="87" parent="36" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <key id="88" parent="36" name="PRIMARY">
+      <columns>module_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="89" parent="37" name="role_id">
+      <mandatory>1</mandatory>
+      <data-type>int(4)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="90" parent="37" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <key id="91" parent="37" name="PRIMARY">
+      <columns>role_id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="92" parent="38" name="role_id">
+      <mandatory>1</mandatory>
+      <data-type>int(4)|0</data-type>
+    </column>
+    <column id="93" parent="38" name="module_id">
+      <mandatory>1</mandatory>
+      <data-type>int(4)|0</data-type>
+    </column>
+    <column id="94" parent="39" name="service_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="95" parent="39" name="account_id">
+      <mandatory>1</mandatory>
+      <data-type>int(9)|0</data-type>
+    </column>
+    <column id="96" parent="39" name="unix_host">
+      <mandatory>1</mandatory>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="97" parent="39" name="os_username">
+      <mandatory>1</mandatory>
+      <data-type>varchar(8)|0</data-type>
+    </column>
+    <column id="98" parent="39" name="login_passwd">
+      <mandatory>1</mandatory>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="99" parent="39" name="status">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="100" parent="39" name="create_date">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="101" parent="39" name="pause_date">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="102" parent="39" name="close_date">
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="103" parent="39" name="cost_id">
+      <mandatory>1</mandatory>
+      <data-type>int(4)|0</data-type>
+    </column>
+    <key id="104" parent="39" name="PRIMARY">
+      <columns>service_id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
