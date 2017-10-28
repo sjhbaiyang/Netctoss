@@ -9,8 +9,16 @@ import com.lanou.bean.RoleInfo;
 public interface RoleInfoService {
 
 
-    PageInfo<RoleInfo> findAllRole(Integer pageNo, Integer pageSize);
+    PageInfo<RoleInfo> findAllRole(Integer pageNo,Integer pageSize);
 
     RoleInfo findRoleById(Integer roleId);
+
+    boolean addRole(String name, String modId);
+
+    boolean updateTheRole(Integer roleId, String name, String modIds);
+
+    boolean deleteTheRole(Integer roleId);
+
+
 
 }

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -29,6 +30,7 @@ public class RoleInfoController {
 
     //到角色修改界面
     @RequestMapping(value = "/role_modi")
+
     public String role_modi(){
         return "role/role_modi";
     }
@@ -57,5 +59,30 @@ public class RoleInfoController {
         System.out.println(roleById);
         return roleById;
     }
+
+    //添加rol
+    @ResponseBody
+    @RequestMapping(value = "/addRole",method = RequestMethod.POST)
+    public boolean addRole(@Param("name")String name,
+                           @Param("modId")String modId){
+        return roleInfoService.addRole(name,modId);
+    }
+
+    //修改
+    @ResponseBody
+    @RequestMapping(value = "/updateTheRole",method = RequestMethod.POST)
+    public boolean updateTheRole(@RequestParam("roleId")Integer roleId,
+                                 @RequestParam("name")String name,
+                                 @RequestParam("modIds")String modIds){
+        return roleInfoService.updateTheRole(roleId,name,modIds);
+    }
+
+    //删除
+    @ResponseBody
+    @RequestMapping(value = "/deleteTheRole",method = RequestMethod.POST)
+    public boolean deleteTheRole(@RequestParam("roleId")Integer roleId){
+        return roleInfoService.deleteTheRole(roleId);
+    }
+
 
 }

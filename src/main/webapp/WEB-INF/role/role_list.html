@@ -11,9 +11,36 @@
     <script language="javascript" type="text/javascript">
         function deleteRole() {
             var r = window.confirm("确定要删除此角色吗？");
-            document.getElementById("operate_result_info").style.display = "block";
+
+            if (r){
+                $.ajax({
+                    url:"/deleteTheRole",
+                    type:"post",
+                    data:{
+                        roleId:$(this).attr("id").slice(3)
+                    },
+                    success:function (result) {
+
+                        $("#showInfo").html(null);
+                        if (!result){
+                            $("#showInfo").html("删除失败,请重试!");
+                        }else {
+                            $("#showInfo").html("删除成功!");
+                        }
+                        document.getElementById("operate_result_info").style.display = "block";
+                        window.setTimeout("operate_result_info.style.display='none'", 1000);
+                        window.setTimeout("", 1500);
+                        var val = $(".current_page").html();
+                        basepage(val);
+                    }
+                })
+            }
+
+
+
         }
 
+        //修改
         function updateRole() {
             var id = $(this).attr("id").slice(6);
             window.location.href = "/role_modi.html?rid="+id;
@@ -205,7 +232,7 @@
         <!--删除的操作提示-->
         <div id="operate_result_info" class="operate_success">
             <img src="../images/close.png" onclick="this.parentNode.style.display='none';"/>
-            删除成功！
+            <div id="showInfo"></div>
         </div> <!--删除错误！该角色被使用，不能删除。-->
         <!--数据区域：用表格展示数据-->
         <div id="data">

@@ -30,16 +30,31 @@
   <select id="findRoleById" resultMap="BaseResultMap">
     SELECT * FROM role_info WHERE role_id=#{roleId}
   </select>
+  <select id="findRoleByName" resultMap="BaseResultMap">
+    SELECT * FROM role_info WHERE name = #{name}
+
+  </select>
+  <select id="findRoleByAdminId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM role_info WHERE role_id IN (
+    SELECT role_id FROM admin_role WHERE admin_id = #{adminId}
+    )
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from role_info
     where role_id = #{roleId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lanou.bean.RoleInfo">
+  <delete id="deleteForR_MByRId" parameterType="Integer">
+    DELETE FROM role_module
+    WHERE role_id = #{roleId}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="roleId" parameterType="com.lanou.bean.RoleInfo">
     insert into role_info (role_id, name)
     values (#{roleId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.lanou.bean.RoleInfo">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="roleId" parameterType="com.lanou.bean.RoleInfo">
     insert into role_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
@@ -57,6 +72,10 @@
         #{name,jdbcType=VARCHAR},
       </if>
     </trim>
+  </insert>
+  <insert id="addRole" parameterType="java.lang.Integer">
+    INSERT INTO role_module (role_id,module_id) VALUES (#{roleId},#{moduleId})
+
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.RoleInfo">
     update role_info
