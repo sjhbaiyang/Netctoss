@@ -44,7 +44,6 @@ public class ServiceController {
     public AjaxResult findAllService(@Param("pageNo") Integer pageNo,
                                      @Param("pageSize") Integer pageSize) {
         PageInfo<Service> allService = serviceService.findAllService(pageNo, pageSize);
-        System.out.println(allService);
         return new AjaxResult(allService);
     }
 
@@ -85,6 +84,7 @@ public class ServiceController {
 
     //模糊查询
     @ResponseBody
+
     @RequestMapping(value = "/fuzzySearchForSer",method = RequestMethod.POST)
     public AjaxResult fuzzySearchForSer(@Param("idcardNo")String idcardNo,
                                         @Param("service")Service service,

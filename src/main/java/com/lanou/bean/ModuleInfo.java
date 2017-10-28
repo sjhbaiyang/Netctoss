@@ -1,9 +1,22 @@
 package com.lanou.bean;
 
+import java.util.List;
+
 public class ModuleInfo {
     private Integer moduleId;
 
     private String name;
+
+    private List<RoleInfo> roleInfoList;
+
+
+    public List<RoleInfo> getRoleInfoList() {
+        return roleInfoList;
+    }
+
+    public void setRoleInfoList(List<RoleInfo> roleInfoList) {
+        this.roleInfoList = roleInfoList;
+    }
 
     public Integer getModuleId() {
         return moduleId;
@@ -20,4 +33,5 @@ public class ModuleInfo {
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
+
 }

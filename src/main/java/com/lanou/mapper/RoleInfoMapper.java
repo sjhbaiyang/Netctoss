@@ -2,6 +2,8 @@ package com.lanou.mapper;
 
 import com.lanou.bean.RoleInfo;
 
+import java.util.List;
+
 public interface RoleInfoMapper {
     int deleteByPrimaryKey(Integer roleId);
 
@@ -14,4 +16,8 @@ public interface RoleInfoMapper {
     int updateByPrimaryKeySelective(RoleInfo record);
 
     int updateByPrimaryKey(RoleInfo record);
+
+    List<RoleInfo> findAllRole();
+
+    RoleInfo findRoleById(Integer roleId);
 }
